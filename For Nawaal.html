@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Love</title>
+    <style>
+        body {
+            background-color: black;
+            color: red;
+            text-align: center;
+            font-family: 'Arial', sans-serif;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        .hidden {
+            display: none;
+        }
+        .button {
+            padding: 10px 20px;
+            font-size: 18px;
+            margin: 10px;
+            cursor: pointer;
+            background-color: red;
+            border: none;
+            color: white;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+        .yes-button {
+            font-size: 18px;
+        }
+        @keyframes fall {
+            0% { transform: translateY(-100px) rotate(0deg); }
+            100% { transform: translateY(100vh) rotate(360deg); }
+        }
+        .rose {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            animation: fall linear infinite;
+        }
+    </style>
+</head>
+<body>
+    <audio autoplay loop>
+        <source src="https://www.bensound.com/bensound-music/bensound-love.mp3" type="audio/mpeg">
+    </audio>
+    
+    <div class="container">
+        <h1>My Love, I'm Sorry 💖</h1>
+        <p>I messed up, and I feel so bad about it. You mean the world to me, and I never want to hurt you.</p>
+        <p>Will you forgive me and let me make it up to you? 🥺</p>
+        
+        <button class="button yes-button" id="yesButton" onclick="showLove()">Yes 💕</button>
+        <button class="button" id="noButton" onclick="showFunny()">No 😢</button>
+        
+        <div id="loveMessage" class="hidden">
+            <h2>Yay! You are the best! 😍</h2>
+            <p>Roses are beautiful, but you deserve much more than just roses. You deserve the whole universe! 🌹✨</p>
+            <p>Happy Roses Day, my love! ❤️</p>
+            <img src="https://media.tenor.com/PXKZhCEfEfsAAAAj/bubu-bubu-dudu.gif" alt="Cute Hugging GIF" width="300px">
+        </div>
+        
+        <div id="funnyMessage" class="hidden">
+            <h2>Oh no! 😱</h2>
+            <p>Okay, let me try again with extra love and lots of roses! 🌹🌹🌹</p>
+        </div>
+    </div>
+    
+    <script>
+        let yesSize = 18;
+        function showLove() {
+            document.getElementById("loveMessage").classList.remove("hidden");
+            document.getElementById("funnyMessage").classList.add("hidden");
+            document.getElementById("yesButton").style.display = "none";
+            document.getElementById("noButton").style.display = "none";
+        }
+        function showFunny() {
+            document.getElementById("funnyMessage").classList.remove("hidden");
+            document.getElementById("loveMessage").classList.add("hidden");
+            
+            yesSize += 10;
+            document.getElementById("yesButton").style.fontSize = yesSize + "px";
+            
+            if (yesSize >= 80) {
+                document.getElementById("yesButton").style.position = "absolute";
+                document.getElementById("yesButton").style.left = "50%";
+                document.getElementById("yesButton").style.top = "50%";
+                document.getElementById("yesButton").style.transform = "translate(-50%, -50%)";
+            }
+        }
+
+        function createRose() {
+            const rose = document.createElement("div");
+            rose.classList.add("rose");
+            rose.innerHTML = "🌹";
+            rose.style.left = Math.random() * 100 + "vw";
+            rose.style.animationDuration = Math.random() * 3 + 2 + "s";
+            document.body.appendChild(rose);
+            setTimeout(() => { rose.remove(); }, 5000);
+        }
+        setInterval(createRose, 300);
+    </script>
+</body>
+</html>
